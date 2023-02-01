@@ -22,7 +22,7 @@ fun MyTodoScreen(modifier: Modifier = Modifier, viewModel: MyTodoViewModel = hil
     val items by produceState<MyUiState>(
         initialValue = MyUiState.Loading,
         key1 = lifecycle,
-        key2 = viewModel
+        key2 = viewModel.uiState
     ) {
         lifecycle.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
             viewModel.uiState.collect {
@@ -33,6 +33,7 @@ fun MyTodoScreen(modifier: Modifier = Modifier, viewModel: MyTodoViewModel = hil
     }
 
     if (items is MyUiState.Success) {
+        Log.e("compose item `````","compose item: $items" )
         MyTodoScreen1(items = (items as MyUiState.Success).data, onSave = viewModel::addTodos,modifier= modifier)
     }
 
@@ -58,6 +59,7 @@ fun MyTodoScreen1(
             })
 
             Button(modifier = Modifier.width(196.dp),onClick = {onSave(todo)}) {
+                Log.e("compose button","compose button $todo")
                 Text(text = todo)
             }
         }
