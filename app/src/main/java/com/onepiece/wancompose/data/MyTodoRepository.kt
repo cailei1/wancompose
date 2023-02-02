@@ -18,7 +18,7 @@ class LocalRepository @Inject constructor(private val myTodoDao: MyTodoDao) : My
         myTodoDao.insertMyTodo(MyTodoModel(todo))
     }
 
-    override val myModels: Flow<List<String>> =
-        myTodoDao.getMyTodos().map { items -> items.map { it.name } }
+    override val myModels: Flow<List<String>>
+        get() = myTodoDao.getMyTodos().map { items -> items.map { it.name } }
 
 }

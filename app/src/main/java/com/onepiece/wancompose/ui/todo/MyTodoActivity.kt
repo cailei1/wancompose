@@ -22,7 +22,7 @@ fun MyTodoScreen(modifier: Modifier = Modifier, viewModel: MyTodoViewModel = hil
     val items by produceState<MyUiState>(
         initialValue = MyUiState.Loading,
         key1 = lifecycle,
-        key2 = viewModel.uiState
+        key2 = viewModel
     ) {
         lifecycle.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
             viewModel.uiState.collect {
